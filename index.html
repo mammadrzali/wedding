@@ -152,24 +152,19 @@
       margin-bottom: 6px;
       text-transform: uppercase;
     }
+
+    /* ✅ Məmməd & Səidə yanbayan qalsın */
     .title h1{
-  margin: 0;
-  font-family:"Playfair Display", serif;
-  font-weight: 700;
+      margin: 0;
+      font-family:"Playfair Display", serif;
+      font-weight: 700;
+      white-space: nowrap;
+      font-size: clamp(24px, 7vw, 34px);
+      line-height: 1.05;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
 
-  /* ✅ 1 sətirdə qalsın */
-  white-space: nowrap;
-
-  /* ✅ telefonda avtomatik kiçilib-böyüsün */
-  font-size: clamp(24px, 7vw, 34px);
-
-  line-height: 1.05;
-
-  /* ✅ azca azaldırıq ki sığsın */
-  letter-spacing: .2px;
-
-  text-transform: uppercase;
-}
     .subtitle{
       margin: 10px auto 0;
       max-width: 92%;
@@ -211,6 +206,37 @@
       padding: 10px 12px;
       font-size: 12.5px;
       box-shadow: 0 10px 18px rgba(180,150,90,.10);
+    }
+
+    /* ✅ Add to Calendar animation */
+    .calBtn{
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+
+    .calBtn::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 30% 30%, rgba(215,177,90,.28), transparent 55%);
+      opacity:0;
+      transition: opacity .25s ease;
+      pointer-events:none;
+    }
+
+    .calBtn.burst{
+      animation: calPulse .35s ease;
+    }
+
+    .calBtn.burst::after{
+      opacity:1;
+    }
+
+    @keyframes calPulse{
+      0%   { transform: scale(1); }
+      45%  { transform: scale(1.06); }
+      100% { transform: scale(1); }
     }
 
     section{
@@ -381,7 +407,7 @@
       </div>
 
       <div class="nav">
-        <a href="#program">Təqvim</a>
+        <a href="wedding.ics" id="addToCalendar" class="calBtn">Add to Calendar 📅</a>
         <a href="#map">Xəritə</a>
         <a href="#count">Geri sayım</a>
         <a href="#address">Ünvan</a>
@@ -550,7 +576,6 @@
 
     window.addEventListener("load", tryAutoPlay);
 
-    // Mobil: ilk toxunuşla da cəhd et
     ["click","touchstart"].forEach(evt=>{
       document.addEventListener(evt, function once(){
         if(!playing){ tryAutoPlay(); }
@@ -573,6 +598,20 @@
         alert("Brauzer səsi blokladı. Bir dəfə də klik edin.");
       }
     });
+
+    // Add to Calendar (animated)
+    const cal = document.getElementById("addToCalendar");
+    if (cal) {
+      cal.addEventListener("click", (e) => {
+        e.preventDefault();
+        cal.classList.remove("burst");
+        void cal.offsetWidth;
+        cal.classList.add("burst");
+        setTimeout(() => {
+          window.location.href = cal.getAttribute("href");
+        }, 280);
+      });
+    }
   </script>
 </body>
 </html>
