@@ -1,617 +1,351 @@
 <!doctype html>
 <html lang="az">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Məmməd & Səidə — Toy Dəvəti 💍</title>
-  <meta name="description" content="30 Mart 2026 • 18:00 • Şahənşah Premium Hall" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Məmməd & Səidə — Toy Dəvəti 💍</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#fffaf7;
-      --text: rgba(27, 24, 20, .92);
-      --muted: rgba(27, 24, 20, .66);
-      --faint: rgba(27, 24, 20, .52);
+<style>
+:root{
+  --bg:#fffaf7;
+  --text:#1b1814;
+  --muted:#6b6258;
+  --border:rgba(210,180,120,.25);
+}
 
-      --card: rgba(255,255,255,.78);
-      --card2: rgba(255,255,255,.62);
-      --border: rgba(210,180,120,.28);
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:Inter, sans-serif;
+  color:var(--text);
+}
 
-      --shadow: 0 18px 50px rgba(180,150,90,.22);
-      --radius: 26px;
+.wrap{
+  max-width:460px;
+  margin:auto;
+  padding:16px;
+}
 
-      --gold1:#d7b15a;
-      --gold2:#f3e2b6;
-      --accent: #b76e79;
-    }
+.card{
+  background:#fff;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 15px 40px rgba(0,0,0,.06);
+  margin-bottom:16px;
+}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+/* COVER */
+.cover{
+  height:460px;
+  border-radius:22px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.08)),
+    url("cover.jpg") center top/cover no-repeat;
+}
 
-    .bgglow{
-      position: fixed;
-      inset: -40px;
-      background:
-        radial-gradient(closest-side at 15% 20%, rgba(215,177,90,.18), transparent 68%),
-        radial-gradient(closest-side at 85% 18%, rgba(255,95,201,.10), transparent 70%),
-        radial-gradient(closest-side at 55% 85%, rgba(245,210,124,.14), transparent 75%);
-      filter: blur(70px) saturate(1.05);
-      opacity:.55;
-      pointer-events:none;
-      z-index:-1;
-    }
+/* TITLE */
+.title{
+  text-align:center;
+  padding:18px 16px 22px;
+}
 
-    .wrap{
-      max-width:460px;
-      margin:0 auto;
-      padding: 18px 16px 36px;
-      padding-bottom: calc(36px + env(safe-area-inset-bottom));
-    }
+.title .date{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
 
-    header{
-      position: sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(255,250,247,.65);
-      border: 1px solid rgba(210,180,120,.18);
-      border-radius: 18px;
-      box-shadow: 0 10px 22px rgba(180,150,90,.10);
-      padding: 10px 12px;
-      margin-bottom: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
+.title h1{
+  margin:0;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  white-space:nowrap;
+  font-size:clamp(24px,7vw,34px);
+  text-transform:uppercase;
+}
 
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width:0;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--gold1), var(--gold2));
-      box-shadow: 0 8px 18px rgba(215,177,90,.35);
-      flex:0 0 auto;
-    }
-    .brand b{
-      font-family:"Playfair Display", serif;
-      font-weight:700;
-      font-size: 14px;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+.subtitle{
+  margin-top:8px;
+  font-size:14px;
+  color:var(--muted);
+}
 
-    .lang{
-      display:flex; gap:6px; align-items:center;
-      flex:0 0 auto;
-    }
-    .pill{
-      border:1px solid rgba(210,180,120,.22);
-      background: rgba(255,255,255,.7);
-      border-radius:999px;
-      padding:7px 10px;
-      font-size:12px;
-      color: var(--muted);
-      user-select:none;
-    }
-    .pill.active{
-      color: var(--text);
-      border-color: rgba(215,177,90,.45);
-      box-shadow: 0 10px 18px rgba(215,177,90,.12);
-    }
+/* INFO BOXES */
+.quick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:0 16px 20px;
+}
 
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
+.qitem{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:10px;
+  font-size:13px;
+}
 
-    .hero{
-      padding: 18px;
-      position: relative;
-    }
+.qitem small{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
 
-    /* ✅ COVER: ağ kənar olmasın, kartı doldursun */
-    .cover{
-      height: 460px;
-      border-radius: 22px;
-      overflow:hidden;
-      border: 1px solid rgba(210,180,120,.25);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.08)),
-        url("cover.jpg") center top/cover no-repeat;
-    }
+/* NAV */
+.nav{
+  display:flex;
+  gap:10px;
+  padding:12px 16px 20px;
+  overflow:auto;
+}
 
-    .title{
-      margin: 16px 2px 0;
-      text-align:center;
-    }
-    .title .dateTop{
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing:.2px;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
+.nav a{
+  text-decoration:none;
+  color:var(--text);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:13px;
+}
 
-    /* ✅ Məmməd & Səidə yanbayan qalsın */
-    .title h1{
-      margin: 0;
-      font-family:"Playfair Display", serif;
-      font-weight: 700;
-      white-space: nowrap;
-      font-size: clamp(24px, 7vw, 34px);
-      line-height: 1.05;
-      letter-spacing: .2px;
-      text-transform: uppercase;
-    }
+/* Add to Calendar Animation */
+.calBtn{
+  position:relative;
+  overflow:hidden;
+}
 
-    .subtitle{
-      margin: 10px auto 0;
-      max-width: 92%;
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.55;
-    }
+.calBtn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 30% 30%, rgba(215,177,90,.28), transparent 55%);
+  opacity:0;
+  transition:.25s;
+}
 
-    .quick{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .qitem{
-      background: var(--card2);
-      border: 1px solid rgba(210,180,120,.18);
-      border-radius: 18px;
-      padding: 10px 12px;
-      text-align:left;
-    }
-    .qitem small{ display:block; color: var(--faint); font-size:12px; }
-    .qitem b{ display:block; font-size:13.5px; margin-top:3px; }
+.calBtn.burst{
+  animation:calPulse .35s ease;
+}
 
-    .nav{
-      display:flex;
-      gap: 10px;
-      padding: 12px 18px 18px;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .nav a{
-      flex: 0 0 auto;
-      text-decoration:none;
-      color: var(--text);
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(210,180,120,.22);
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-      box-shadow: 0 10px 18px rgba(180,150,90,.10);
-    }
+.calBtn.burst::after{
+  opacity:1;
+}
 
-    /* ✅ Add to Calendar animation */
-    .calBtn{
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
-    }
+@keyframes calPulse{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.06)}
+  100%{transform:scale(1)}
+}
 
-    .calBtn::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at 30% 30%, rgba(215,177,90,.28), transparent 55%);
-      opacity:0;
-      transition: opacity .25s ease;
-      pointer-events:none;
-    }
+/* COUNTDOWN */
+.count{
+  padding:18px;
+}
 
-    .calBtn.burst{
-      animation: calPulse .35s ease;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
 
-    .calBtn.burst::after{
-      opacity:1;
-    }
+.box{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 6px;
+  text-align:center;
+}
 
-    @keyframes calPulse{
-      0%   { transform: scale(1); }
-      45%  { transform: scale(1.06); }
-      100% { transform: scale(1); }
-    }
+.box b{
+  display:block;
+  font-size:18px;
+}
 
-    section{
-      margin-top: 14px;
-      padding: 18px;
-    }
-    .secTitle{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      margin-bottom: 10px;
-    }
-    .secTitle h2{
-      margin:0;
-      font-size: 14px;
-      letter-spacing:.2px;
-    }
-    .secTitle span{
-      font-size: 12px;
-      color: var(--muted);
-    }
+.box small{
+  font-size:12px;
+  color:var(--muted);
+}
 
-    .countdown{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .box{
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(210,180,120,.22);
-      border-radius: 18px;
-      padding: 12px 8px;
-      text-align:center;
-    }
-    .box b{
-      display:block;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing:.2px;
-    }
-    .box small{
-      display:block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+/* PROGRAM */
+.programSection{
+  padding:20px;
+}
 
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(210,180,120,.20);
-      border-radius: 18px;
-      padding: 10px 12px;
-    }
-    .row .left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width:0;
-    }
-    .row .left b{ font-size: 13px; }
-    .row .left small{ font-size: 12px; color: var(--muted); }
-    .row .time{
-      font-weight: 700;
-      font-size: 12.5px;
-      color: rgba(27,24,20,.86);
-      background: linear-gradient(135deg, rgba(215,177,90,.20), rgba(243,226,182,.25));
-      border: 1px solid rgba(215,177,90,.25);
-      padding: 7px 10px;
-      border-radius: 999px;
-      white-space:nowrap;
-    }
+.programSection h2{
+  font-size:14px;
+  letter-spacing:4px;
+  color:var(--muted);
+}
 
-    .actions{
-      display:flex;
-      gap:10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .btn{
-      appearance:none;
-      border: 1px solid rgba(210,180,120,.30);
-      background: rgba(255,255,255,.78);
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-      cursor:pointer;
-      color: var(--text);
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      box-shadow: 0 14px 26px rgba(180,150,90,.12);
-    }
-    .btn.primary{
-      border-color: rgba(183,110,121,.35);
-      background: rgba(183,110,121,.10);
-    }
+.programList{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-top:18px;
+}
 
-    .musicBtn{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 99;
-      border: 1px solid rgba(210,180,120,.30);
-      background: rgba(255,255,255,.86);
-      border-radius: 999px;
-      padding: 12px 14px;
-      font-size: 13px;
-      cursor:pointer;
-      box-shadow: 0 18px 40px rgba(180,150,90,.18);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+.programItem{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 
-    footer{
-      margin-top: 14px;
-      padding: 18px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-  </style>
+.dotGold{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#d7b15a,#f3e2b6);
+}
+
+.pText{
+  flex:1;
+  font-weight:600;
+}
+
+.pTime{
+  font-weight:600;
+  color:rgba(27,24,20,.7);
+}
+
+/* MUSIC */
+.musicBtn{
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:50px;
+  padding:12px 16px;
+  font-size:13px;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+</style>
 </head>
 
 <body>
-  <div class="bgglow"></div>
 
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <span class="dot"></span>
-        <b>Məmməd & Səidə • Toy Dəvəti</b>
-      </div>
-      <div class="lang">
-        <span class="pill active">AZ</span>
-        <span class="pill" title="sadəcə görünüş üçün">EN</span>
-      </div>
-    </header>
+<div class="wrap">
 
-    <div class="card">
-      <div class="hero" id="top">
-        <div class="cover" aria-label="Cover"></div>
+<div class="card">
+<div class="cover"></div>
 
-        <div class="title">
-          <div class="dateTop">30 MART 2026</div>
-          <h1>MƏMMƏD & SƏİDƏ</h1>
-          <p class="subtitle">
-            Sevgi ilə sizi həyatımızın ən xoş gününü birlikdə qeyd etməyə dəvət edirik 💛
-          </p>
-        </div>
+<div class="title">
+<div class="date">30 MART 2026</div>
+<h1>MƏMMƏD & SƏİDƏ</h1>
+<div class="subtitle">
+Sevgi ilə sizi həyatımızın ən xoş gününü birlikdə qeyd etməyə dəvət edirik 💛
+</div>
+</div>
 
-        <div class="quick">
-          <div class="qitem"><small>Tarix</small><b>30 Mart 2026</b></div>
-          <div class="qitem"><small>Saat</small><b>18:00</b></div>
-          <div class="qitem"><small>Məkan</small><b>Şahənşah Premium Hall</b></div>
-          <div class="qitem"><small>Xəritə</small><b>Google Maps</b></div>
-        </div>
-      </div>
+<div class="quick">
+<div class="qitem"><small>Tarix</small>30 Mart 2026</div>
+<div class="qitem"><small>Saat</small>18:00</div>
+<div class="qitem"><small>Məkan</small>Şahənşah Premium Hall</div>
+<div class="qitem">
+<b>
+<a href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank" style="text-decoration:none;color:inherit;">
+📍 Google Maps
+</a>
+</b>
+</div>
+</div>
 
-      <div class="nav">
-        <a href="wedding.ics" id="addToCalendar" class="calBtn">Add to Calendar 📅</a>
-        <a href="#map">Xəritə</a>
-        <a href="#count">Geri sayım</a>
-        <a href="#address">Ünvan</a>
-      </div>
-    </div>
+<div class="nav">
+<a href="wedding.ics" id="addToCalendar" class="calBtn">Add to Calendar 📅</a>
+<a href="#count">⏳ Geri sayım</a>
+<a href="#program">📋 Proqram</a>
+</div>
 
-    <div class="card">
-      <section id="count">
-        <div class="secTitle">
-          <h2>Geri sayım</h2>
-          <span>Sizinlə birgə qeyd etməyi səbirsizliklə gözləyirik</span>
-        </div>
+</div>
 
-        <div class="countdown">
-          <div class="box"><b id="d">—</b><small>Gün</small></div>
-          <div class="box"><b id="h">—</b><small>Saat</small></div>
-          <div class="box"><b id="m">—</b><small>Dəq</small></div>
-          <div class="box"><b id="s">—</b><small>San</small></div>
-        </div>
-      </section>
-    </div>
+<div class="card count" id="count">
+<h2>Geri sayım</h2>
+<div class="grid">
+<div class="box"><b id="d">--</b><small>Gün</small></div>
+<div class="box"><b id="h">--</b><small>Saat</small></div>
+<div class="box"><b id="m">--</b><small>Dəq</small></div>
+<div class="box"><b id="s">--</b><small>San</small></div>
+</div>
+</div>
 
-    <div class="card">
-      <section id="program">
-        <div class="secTitle">
-          <h2>Proqram</h2>
-          <span>Axşam planı</span>
-        </div>
+<div class="card programSection" id="program">
+<h2>PROQRAM</h2>
+<div class="programList">
+<div class="programItem"><span class="dotGold"></span><span class="pText">Qonaqların qarşılanması</span><span class="pTime">18:00</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Toyun başlaması</span><span class="pTime">19:00</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">İlk rəqs</span><span class="pTime">19:15</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Xalq musiqiləri</span><span class="pTime">19:00–20:00</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Xüsusi təqdimat mahnıları</span><span class="pTime">20:00–20:30</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Saksafon Band</span><span class="pTime">20:35</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Aş təqdimatı</span><span class="pTime">21:00</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Tort</span><span class="pTime">21:30</span></div>
+<div class="programItem"><span class="dotGold"></span><span class="pText">Disko</span><span class="pTime">22:00</span></div>
+</div>
+</div>
 
-        <div class="list">
-          <div class="row">
-            <div class="left"><b>Qonaqların qarşılanması</b><small>Giriş</small></div>
-            <div class="time">18:00</div>
-          </div>
-          <div class="row">
-            <div class="left"><b>Toy başlayır</b><small>Açılış</small></div>
-            <div class="time">19:00</div>
-          </div>
-          <div class="row">
-            <div class="left"><b>İlk rəqs</b><small>Gəlin & bəy</small></div>
-            <div class="time">19:15</div>
-          </div>
-          <div class="row">
-            <div class="left"><b>Tort</b><small>Şirin an</small></div>
-            <div class="time">21:30</div>
-          </div>
-        </div>
-      </section>
-    </div>
+</div>
 
-    <div class="card">
-      <section id="map">
-        <div class="secTitle">
-          <h2>Xəritə</h2>
-          <span>İstiqamət</span>
-        </div>
+<button class="musicBtn" id="musicBtn">🎵 Musiqini başlat</button>
 
-        <div class="actions">
-          <a class="btn primary" href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank" rel="noopener">
-            📍 Xəritədə aç
-          </a>
-          <button class="btn" id="copyBtn">📋 Ünvanı kopyala</button>
-        </div>
+<audio id="bgMusic" loop preload="auto">
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
-        <p style="margin:12px 2px 0; color:var(--muted); font-size:13px; line-height:1.5;">
-          Məkan: <b>Şahənşah Premium Hall</b>
-        </p>
-      </section>
-    </div>
+<script>
+const target=new Date("2026-03-30T18:00:00").getTime();
+setInterval(()=>{
+const now=new Date().getTime();
+const diff=target-now;
+if(diff<=0)return;
+document.getElementById("d").textContent=Math.floor(diff/(1000*60*60*24));
+document.getElementById("h").textContent=Math.floor(diff/(1000*60*60)%24);
+document.getElementById("m").textContent=Math.floor(diff/(1000*60)%60);
+document.getElementById("s").textContent=Math.floor(diff/1000%60);
+},1000);
 
-    <div class="card">
-      <section id="address">
-        <div class="secTitle">
-          <h2>Ünvan</h2>
-          <span>Görüşərik 💛</span>
-        </div>
+const music=document.getElementById("bgMusic");
+const btn=document.getElementById("musicBtn");
+let playing=false;
 
-        <div class="row" style="justify-content:flex-start; gap:12px;">
-          <div class="left">
-            <b id="addrTitle">Şahənşah Premium Hall</b>
-            <small id="addrText">Google Maps linki ilə rahat istiqamət götürə bilərsiniz.</small>
-          </div>
-        </div>
+window.addEventListener("load",async()=>{
+try{
+music.muted=true;
+await music.play();
+music.muted=false;
+playing=true;
+btn.textContent="⏸️ Musiqini dayandır";
+}catch(e){}
+});
 
-        <div class="actions">
-          <a class="btn" href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank" rel="noopener">🧭 İstiqamət</a>
-          <a class="btn" href="#top">⬆️ Yuxarı</a>
-        </div>
-      </section>
-    </div>
+btn.addEventListener("click",async()=>{
+if(!playing){
+await music.play();
+btn.textContent="⏸️ Musiqini dayandır";
+playing=true;
+}else{
+music.pause();
+btn.textContent="🎵 Musiqini başlat";
+playing=false;
+}
+});
 
-    <footer>
-      Sevgi ilə • Məmməd & Səidə • 2026
-    </footer>
-  </div>
+const cal=document.getElementById("addToCalendar");
+if(cal){
+cal.addEventListener("click",e=>{
+e.preventDefault();
+cal.classList.remove("burst");
+void cal.offsetWidth;
+cal.classList.add("burst");
+setTimeout(()=>{window.location.href=cal.getAttribute("href");},280);
+});
+}
+</script>
 
-  <!-- MUSIC -->
-  <button class="musicBtn" id="musicBtn">🎵 Musiqini başlat</button>
-  <audio id="bgMusic" loop preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    // COUNTDOWN
-    const target = new Date("2026-03-30T18:00:00").getTime();
-    const $d = document.getElementById("d");
-    const $h = document.getElementById("h");
-    const $m = document.getElementById("m");
-    const $s = document.getElementById("s");
-
-    function pad(n){ return String(n).padStart(2,"0"); }
-
-    const timer = setInterval(() => {
-      const now = Date.now();
-      let diff = target - now;
-
-      if(diff <= 0){
-        clearInterval(timer);
-        $d.textContent = $h.textContent = $m.textContent = $s.textContent = "00";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000*60*60*24));
-      diff %= (1000*60*60*24);
-      const hours = Math.floor(diff / (1000*60*60));
-      diff %= (1000*60*60);
-      const mins = Math.floor(diff / (1000*60));
-      const secs = Math.floor((diff % (1000*60)) / 1000);
-
-      $d.textContent = pad(days);
-      $h.textContent = pad(hours);
-      $m.textContent = pad(mins);
-      $s.textContent = pad(secs);
-    }, 1000);
-
-    // COPY ADDRESS
-    const copyBtn = document.getElementById("copyBtn");
-    copyBtn.addEventListener("click", async () => {
-      const text = "Şahənşah Premium Hall";
-      try{
-        await navigator.clipboard.writeText(text);
-        copyBtn.textContent = "✅ Kopyalandı";
-        setTimeout(()=> copyBtn.textContent = "📋 Ünvanı kopyala", 1600);
-      }catch(e){
-        alert("Kopyalama alınmadı. Ünvan: " + text);
-      }
-    });
-
-    // MUSIC (auto + toggle)
-    const music = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    let playing = false;
-
-    async function tryAutoPlay(){
-      try{
-        music.muted = true;
-        await music.play();
-        music.muted = false;
-        playing = true;
-        musicBtn.textContent = "⏸️ Musiqini dayandır";
-      }catch(e){
-        playing = false;
-        musicBtn.textContent = "🎵 Musiqini başlat";
-      }
-    }
-
-    window.addEventListener("load", tryAutoPlay);
-
-    ["click","touchstart"].forEach(evt=>{
-      document.addEventListener(evt, function once(){
-        if(!playing){ tryAutoPlay(); }
-        document.removeEventListener(evt, once, {passive:true});
-      }, {passive:true});
-    });
-
-    musicBtn.addEventListener("click", async () => {
-      try{
-        if(!playing){
-          await music.play();
-          playing = true;
-          musicBtn.textContent = "⏸️ Musiqini dayandır";
-        }else{
-          music.pause();
-          playing = false;
-          musicBtn.textContent = "🎵 Musiqini başlat";
-        }
-      }catch(err){
-        alert("Brauzer səsi blokladı. Bir dəfə də klik edin.");
-      }
-    });
-
-    // Add to Calendar (animated)
-    const cal = document.getElementById("addToCalendar");
-    if (cal) {
-      cal.addEventListener("click", (e) => {
-        e.preventDefault();
-        cal.classList.remove("burst");
-        void cal.offsetWidth;
-        cal.classList.add("burst");
-        setTimeout(() => {
-          window.location.href = cal.getAttribute("href");
-        }, 280);
-      });
-    }
-  </script>
 </body>
 </html>
