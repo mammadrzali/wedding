@@ -153,14 +153,23 @@
       text-transform: uppercase;
     }
     .title h1{
-      margin: 0;
-      font-family:"Playfair Display", serif;
-      font-weight: 700;
-      font-size: 34px;
-      line-height: 1.05;
-      letter-spacing:.4px;
-      text-transform: uppercase;
-    }
+  margin: 0;
+  font-family:"Playfair Display", serif;
+  font-weight: 700;
+
+  /* ✅ 1 sətirdə qalsın */
+  white-space: nowrap;
+
+  /* ✅ telefonda avtomatik kiçilib-böyüsün */
+  font-size: clamp(24px, 7vw, 34px);
+
+  line-height: 1.05;
+
+  /* ✅ azca azaldırıq ki sığsın */
+  letter-spacing: .2px;
+
+  text-transform: uppercase;
+}
     .subtitle{
       margin: 10px auto 0;
       max-width: 92%;
