@@ -40,6 +40,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Soft background glow */
     .bgglow{
       position: fixed;
       inset: -40px;
@@ -53,12 +54,28 @@
       z-index:-1;
     }
 
+    /* phone-like width */
     .wrap{
       max-width:460px;
       margin:0 auto;
       padding: 18px 16px 36px;
       padding-bottom: calc(36px + env(safe-area-inset-bottom));
     }
+
+    /* fade-in animations */
+    @keyframes fadeUp{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+    .fade{
+      opacity:0;
+      animation: fadeUp .7s ease forwards;
+    }
+    .d1{ animation-delay:.05s; }
+    .d2{ animation-delay:.12s; }
+    .d3{ animation-delay:.18s; }
+    .d4{ animation-delay:.24s; }
+    .d5{ animation-delay:.30s; }
 
     header{
       position: sticky;
@@ -130,16 +147,76 @@
       position: relative;
     }
 
-    /* ✅ COVER: tam görünsün deyə contain + daha hündür */
+    /* ✅ Cover full-bleed (no white edges) */
     .cover{
-      height: 420px;
+      height: 460px;
       border-radius: 22px;
       overflow:hidden;
       border: 1px solid rgba(210,180,120,.25);
+      position: relative;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.06)),
-        url("cover.jpg") center/contain no-repeat;
-      background-color: rgba(255,255,255,.65);
+        url("cover.jpg") center top/cover no-repeat;
+    }
+
+    /* overlay gradients (readability + premium look) */
+    .cover::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(closest-side at 50% 25%, rgba(243,226,182,.22), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.06), rgba(0,0,0,.14));
+      pointer-events:none;
+    }
+
+    /* gold glow border */
+    .cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      box-shadow:
+        inset 0 0 0 1px rgba(243,226,182,.30),
+        0 22px 60px rgba(215,177,90,.18);
+      pointer-events:none;
+    }
+
+    /* overlay text on the cover */
+    .coverText{
+      position:absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(210,180,120,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 16px 40px rgba(180,150,90,.16);
+      text-align:center;
+    }
+    .coverText .mini{
+      font-size: 12px;
+      color: rgba(27,24,20,.70);
+      letter-spacing:.3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .coverText .names{
+      font-family:"Playfair Display", serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+      margin:0;
+      line-height:1.1;
+    }
+    .coverText .place{
+      margin-top: 6px;
+      font-size: 12.5px;
+      color: rgba(27,24,20,.70);
+      letter-spacing:.2px;
+      text-transform: uppercase;
     }
 
     .title{
@@ -317,7 +394,7 @@
       bottom: 16px;
       z-index: 99;
       border: 1px solid rgba(210,180,120,.30);
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.88);
       border-radius: 999px;
       padding: 12px 14px;
       font-size: 13px;
@@ -341,7 +418,7 @@
   <div class="bgglow"></div>
 
   <div class="wrap">
-    <header>
+    <header class="fade d1">
       <div class="brand">
         <span class="dot"></span>
         <b>Məmməd & Səidə • Toy Dəvəti</b>
@@ -352,11 +429,17 @@
       </div>
     </header>
 
-    <div class="card">
+    <div class="card fade d2">
       <div class="hero" id="top">
-        <div class="cover" aria-label="Cover"></div>
+        <div class="cover">
+          <div class="coverText fade d3">
+            <div class="mini">30 Mart 2026 • 18:00</div>
+            <h3 class="names">MƏMMƏD & SƏİDƏ</h3>
+            <div class="place">Şahənşah Premium Hall</div>
+          </div>
+        </div>
 
-        <div class="title">
+        <div class="title fade d3">
           <div class="dateTop">30 MART 2026</div>
           <h1>MƏMMƏD & SƏİDƏ</h1>
           <p class="subtitle">
@@ -364,7 +447,7 @@
           </p>
         </div>
 
-        <div class="quick">
+        <div class="quick fade d4">
           <div class="qitem">
             <small>Tarix</small>
             <b>30 Mart 2026</b>
@@ -384,7 +467,7 @@
         </div>
       </div>
 
-      <div class="nav">
+      <div class="nav fade d5">
         <a href="#program">Təqvim</a>
         <a href="#map">Xəritə</a>
         <a href="#count">Geri sayım</a>
@@ -392,7 +475,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card fade d3">
       <section id="count">
         <div class="secTitle">
           <h2>Geri sayım</h2>
@@ -408,7 +491,7 @@
       </section>
     </div>
 
-    <div class="card">
+    <div class="card fade d4">
       <section id="program">
         <div class="secTitle">
           <h2>Proqram</h2>
@@ -436,7 +519,7 @@
       </section>
     </div>
 
-    <div class="card">
+    <div class="card fade d4">
       <section id="map">
         <div class="secTitle">
           <h2>Xəritə</h2>
@@ -458,7 +541,7 @@
       </section>
     </div>
 
-    <div class="card">
+    <div class="card fade d5">
       <section id="address">
         <div class="secTitle">
           <h2>Ünvan</h2>
@@ -479,7 +562,7 @@
       </section>
     </div>
 
-    <footer>
+    <footer class="fade d5">
       Sevgi ilə • Məmməd & Səidə • 2026
     </footer>
   </div>
@@ -492,7 +575,6 @@
 
   <script>
     // ========= SETTINGS =========
-    // Toy: 30 Mart 2026, 18:00
     const WEDDING_ISO = "2026-03-30T18:00:00";
 
     // ========= COUNTDOWN =========
@@ -501,7 +583,6 @@
     const $h = document.getElementById("h");
     const $m = document.getElementById("m");
     const $s = document.getElementById("s");
-
     function pad(n){ return String(n).padStart(2, "0"); }
 
     const timer = setInterval(() => {
@@ -543,14 +624,14 @@
       }
     });
 
-    // ========= MUSIC (auto + toggle) =========
+    // ========= MUSIC (auto + first touch + toggle) =========
     const music = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
     let playing = false;
 
     async function tryAutoPlay(){
       try{
-        // ✅ Autoplay üçün “muted start” fəndi (bəzən kömək edir)
+        // Autoplay üçün "muted start" (bəzən kömək edir)
         music.muted = true;
         await music.play();
         music.muted = false;
@@ -558,7 +639,6 @@
         playing = true;
         musicBtn.textContent = "⏸️ Musiqini dayandır";
       }catch(e){
-        // Autoplay bloklandı — problem deyil, düymə ilə başlayacaq
         playing = false;
         musicBtn.textContent = "🎵 Musiqini başlat";
       }
