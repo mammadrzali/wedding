@@ -351,7 +351,9 @@ section{
 </div>
 
 <button class="musicBtn" id="musicBtn">🎵 Musiqini başlat</button>
-<audio id="bgMusic" loop preload="auto">
+
+<!-- ✅ Autoplay muted + first touch unmute -->
+<audio id="bgMusic" loop preload="auto" autoplay muted playsinline>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -374,81 +376,6 @@ document.getElementById("copyAddress").onclick=()=>{
   navigator.clipboard.writeText("Şahənşah Premium Hall");
 };
 
-// 🎶 MUSIC AUTO + FADE-IN (mobil uyumlu)
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
-let playing = false;
-
-function fadeInAudio(durationMs = 2200){
-  // volume yavaş artır (0 -> 1)
-  try{ music.volume = 0; }catch(e){}
-  const steps = 22;
-  const stepTime = Math.max(30, Math.floor(durationMs / steps));
-  let i = 0;
-  const t = setInterval(()=>{
-    i++;
-    const v = Math.min(1, i/steps);
-    try{ music.volume = v; }catch(e){}
-    if(v >= 1) clearInterval(t);
-  }, stepTime);
-}
-
-async function startAutoMusic(){
-  try{
-    // autoplay üçün ilk cəhd: muted
-    music.muted = true;
-    await music.play();
-    playing = true;
-
-    // açılış animasiyası bitəndən sonra səsi açıb fade-in et
-    setTimeout(()=>{
-      music.muted = false;
-      btn.textContent = "⏸️ Musiqini dayandır";
-      fadeInAudio(2200);
-    }, 650);
-  }catch(e){
-    playing = false;
-    btn.textContent = "🎵 Musiqini başlat";
-  }
-}
-
-// səhifə açılınca cəhd et
-window.addEventListener("load", startAutoMusic);
-
-// mobil brauzerlərdə ilk toxunuşla da aktiv et
-function unlockOnFirstTouch(){
-  if(!playing){
-    startAutoMusic();
-  }else{
-    // artıq başlayıbsa, sadəcə səsi aç
-    music.muted = false;
-    btn.textContent = "⏸️ Musiqini dayandır";
-  }
-  document.removeEventListener("click", unlockOnFirstTouch);
-  document.removeEventListener("touchstart", unlockOnFirstTouch);
-}
-document.addEventListener("click", unlockOnFirstTouch);
-document.addEventListener("touchstart", unlockOnFirstTouch, {passive:true});
-
-// manual düymə
-btn.onclick = async ()=>{
-  try{
-    if(!playing){
-      await music.play();
-      music.muted = false;
-      playing = true;
-      btn.textContent = "⏸️ Musiqini dayandır";
-      fadeInAudio(1800);
-    }else{
-      music.pause();
-      playing = false;
-      btn.textContent = "🎵 Musiqini başlat";
-    }
-  }catch(err){
-    alert("Brauzer səsi blokladı. Ekrana bir dəfə toxunun.");
-  }
-};
-
 // Calendar button pulse
 const cal=document.getElementById("addToCalendar");
 if(cal){
@@ -458,6 +385,73 @@ if(cal){
     cal.classList.add("burst");
   });
 }
+
+// 🎶 MUSIC: muted autoplay, then any screen tap enables sound + 2s fade-in
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+let soundEnabled = false;
+
+function fadeInAudio(duration = 2000){
+  try { music.volume = 0; } catch(e) {}
+  const start = performance.now();
+
+  function step(now){
+    const progress = Math.min((now - start) / duration, 1);
+    try { music.volume = progress; } catch(e) {}
+    if(progress < 1){
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// səhifə açılan kimi muted autoplay cəhdi
+window.addEventListener("load", async () => {
+  try{
+    music.muted = true;
+    await music.play();
+  }catch(e){
+    // bəzi brauzerlər yenə bloklaya bilər
+  }
+});
+
+// ekranın istənilən yerinə ilk toxunuşda səsi aç
+async function enableSound(){
+  if(soundEnabled) return;
+
+  try{
+    music.muted = false;
+    await music.play();
+    fadeInAudio(2000); // ✅ 2 saniyə
+    soundEnabled = true;
+    btn.textContent = "⏸️ Musiqini dayandır";
+  }catch(e){}
+
+  document.removeEventListener("pointerdown", enableSound);
+  document.removeEventListener("touchstart", enableSound);
+}
+
+document.addEventListener("pointerdown", enableSound, { once:true });
+document.addEventListener("touchstart", enableSound, { once:true, passive:true });
+
+// Manual music button
+btn.onclick = async () => {
+  try{
+    if(music.paused){
+      music.muted = false;
+      await music.play();
+      fadeInAudio(2000);
+      btn.textContent = "⏸️ Musiqini dayandır";
+      soundEnabled = true;
+    }else{
+      music.pause();
+      btn.textContent = "🎵 Musiqini başlat";
+      soundEnabled = false;
+    }
+  }catch(err){
+    alert("Səs üçün icazə verilmədi.");
+  }
+};
 </script>
 
 </body>
