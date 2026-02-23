@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mammad & Saida</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #f8f5f2;
+            color: #333;
+        }
+
+        header {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1529636798458-92182e662485') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-blend-mode: darken;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .date {
+            font-size: 22px;
+            margin-top: 15px;
+        }
+
+        section {
+            padding: 60px 20px;
+        }
+
+        .countdown {
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        .location a {
+            color: #b76e79;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            padding: 20px;
+            background: #eee;
+        }
+
+        @media(max-width:768px){
+            h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Mammad & Saida</h1>
+    <div class="date">30 Mart 2026</div>
+</header>
+
+<section>
+    <h2>Sevgi ilə dəvət edirik 💍</h2>
+    <p>Əziz qonaqlarımız, həyatımızın ən xoş günündə sizi yanımızda görməkdən məmnun olarıq.</p>
+</section>
+
+<section>
+    <h2>Toy Məlumatları</h2>
+    <p><strong>Tarix:</strong> 30 Mart 2026</p>
+    <p><strong>Saat:</strong> 18:00</p>
+
+    <p class="location">
+        <strong>Məkan:</strong> <br>
+        Shahanshah Premium Hall <br><br>
+        <a href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank">
+            Xəritədə bax
+        </a>
+    </p>
+</section>
+
+<section>
+    <h2>Geri Sayım ⏳</h2>
+    <div class="countdown" id="countdown"></div>
+</section>
+
+<footer>
+    Mammad & Saida ❤️ 2026
+</footer>
+
+<script>
+    const weddingDate = new Date("2026-03-30T18:00:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById("countdown").innerHTML =
+            days + " gün " + hours + " saat " + minutes + " dəqiqə qaldı";
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "Bu gün bizim toyumuzdur! 🎉";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
