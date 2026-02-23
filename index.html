@@ -117,11 +117,10 @@ header b{
   grid-column:1/-1;
 }
 
-/* NAV */
+/* NAV: yalnız 1 düymə */
 .nav{
   padding:0 18px 18px;
 }
-
 .nav a{
   display:block;
   width:100%;
@@ -132,12 +131,12 @@ header b{
   border:1px solid rgba(210,180,120,.25);
   background:#fff;
   font-size:14px;
+  white-space: nowrap;
 }
 
 .calBtn.burst{
   animation:pulse .3s ease;
 }
-
 @keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.07)}
@@ -148,33 +147,32 @@ section{
   padding:20px;
 }
 
+/* COUNTDOWN */
 .countdown{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
 }
-
 .box{
   border:1px solid rgba(210,180,120,.25);
   border-radius:18px;
   padding:12px;
   text-align:center;
 }
-
 .box b{font-size:20px}
+.box small{color:var(--muted);}
 
+/* PROGRAM */
 .programList{
   display:flex;
   flex-direction:column;
   gap:18px;
 }
-
 .programItem{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
 .dotGold{
   width:8px;
   height:8px;
@@ -183,25 +181,64 @@ section{
   margin-right:8px;
 }
 
+/* RSVP (Google Form iframe) */
+.rsvpTitle{
+  letter-spacing:4px;
+  font-size:14px;
+  color:var(--muted);
+  margin:0 0 10px;
+}
+.rsvpSub{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:13.5px;
+  line-height:1.45;
+}
+.formWrap iframe{
+  width:100%;
+  height: 760px; /* telefonda rahat olsun */
+  border-radius:22px;
+  border:1px solid rgba(210,180,120,.25);
+  background:#fff;
+}
+.rsvpActions{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+.rsvpBtn{
+  flex:1;
+  padding:12px;
+  border-radius:18px;
+  border:1px solid rgba(210,180,120,.3);
+  background:#fff;
+  text-decoration:none;
+  text-align:center;
+  color:#000;
+  font-weight:600;
+}
+.rsvpBtn.primary{
+  border:none;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2));
+}
+
+/* ADDRESS / MAP */
 .addressSection h2{
   letter-spacing:4px;
   font-size:14px;
   color:var(--muted);
 }
-
 .mapWrap iframe{
   width:100%;
   height:260px;
   border-radius:22px;
   border:1px solid rgba(210,180,120,.25);
 }
-
 .mapButtons{
   display:flex;
   gap:12px;
   margin-top:16px;
 }
-
 .copyBtn{
   flex:1;
   padding:12px;
@@ -209,7 +246,6 @@ section{
   border:1px solid rgba(210,180,120,.3);
   background:#fff;
 }
-
 .directionBtn{
   flex:1;
   padding:12px;
@@ -237,108 +273,156 @@ section{
 <div class="wrap">
 
 <header>
-<b>Məmməd & Səidə • Toy Dəvəti</b>
+  <b>Məmməd & Səidə • Toy Dəvəti</b>
 </header>
 
 <div class="card">
-<div class="cover"></div>
+  <div class="cover"></div>
 
-<div class="title">
-<div>30 MART 2026</div>
-<h1>MƏMMƏD & SƏİDƏ</h1>
-<p class="subtitle">Sevgi ilə sizi həyatımızın ən xoş gününü birlikdə qeyd etməyə dəvət edirik 💛</p>
-</div>
+  <div class="title">
+    <div>30 MART 2026</div>
+    <h1>MƏMMƏD & SƏİDƏ</h1>
+    <p class="subtitle">Sevgi ilə sizi həyatımızın ən xoş gününü birlikdə qeyd etməyə dəvət edirik 💛</p>
+  </div>
 
-<div class="quick">
-<div class="qitem">
-<small><span class="qicon">📅</span>Tarix</small>
-<b>30 Mart 2026</b>
-</div>
+  <div class="quick">
+    <div class="qitem">
+      <small><span class="qicon">📅</span>Tarix</small>
+      <b>30 Mart 2026</b>
+    </div>
 
-<div class="qitem">
-<small><span class="qicon">🕒</span>Saat</small>
-<b>18:00</b>
-</div>
+    <div class="qitem">
+      <small><span class="qicon">🕒</span>Saat</small>
+      <b>18:00</b>
+    </div>
 
-<div class="qitem">
-<small><span class="qicon">📍</span>Məkan</small>
-<b>Şahənşah Premium Hall</b>
-</div>
-</div>
+    <div class="qitem">
+      <small><span class="qicon">📍</span>Məkan</small>
+      <b>Şahənşah Premium Hall</b>
+    </div>
+  </div>
 
-<div class="nav">
-<a href="wedding.ics" id="addToCalendar" class="calBtn">Təqvimə əlavə et 📅</a>
-</div>
+  <div class="nav">
+    <a href="wedding.ics" id="addToCalendar" class="calBtn">Təqvimə əlavə et 📅</a>
+  </div>
 </div>
 
 <div class="card">
-<section id="count">
-<h3>Geri sayım</h3>
-<div class="countdown">
-<div class="box"><b id="d"></b><small>Gün</small></div>
-<div class="box"><b id="h"></b><small>Saat</small></div>
-<div class="box"><b id="m"></b><small>Dəq</small></div>
-<div class="box"><b id="s"></b><small>San</small></div>
-</div>
-</section>
+  <section id="count">
+    <h3>Geri sayım</h3>
+    <div class="countdown">
+      <div class="box"><b id="d"></b><small>Gün</small></div>
+      <div class="box"><b id="h"></b><small>Saat</small></div>
+      <div class="box"><b id="m"></b><small>Dəq</small></div>
+      <div class="box"><b id="s"></b><small>San</small></div>
+    </div>
+  </section>
 </div>
 
 <div class="card" id="program">
-<section>
-<h3>PROQRAM</h3>
-<div class="programList">
-<div class="programItem"><span><span class="dotGold"></span>Qonaqların qarşılanması</span><span>18:00</span></div>
-<div class="programItem"><span><span class="dotGold"></span>Toyun başlaması</span><span>19:00</span></div>
-<div class="programItem"><span><span class="dotGold"></span>İlk rəqs</span><span>19:15</span></div>
-<div class="programItem"><span><span class="dotGold"></span>Tort</span><span>21:30</span></div>
-<div class="programItem"><span><span class="dotGold"></span>Disko</span><span>22:00</span></div>
-</div>
-</section>
+  <section>
+    <h3>PROQRAM</h3>
+    <div class="programList">
+      <div class="programItem"><span><span class="dotGold"></span>Qonaqların qarşılanması</span><span>18:00</span></div>
+      <div class="programItem"><span><span class="dotGold"></span>Toyun başlaması</span><span>19:00</span></div>
+      <div class="programItem"><span><span class="dotGold"></span>İlk rəqs</span><span>19:15</span></div>
+      <div class="programItem"><span><span class="dotGold"></span>Tort</span><span>21:30</span></div>
+      <div class="programItem"><span><span class="dotGold"></span>Disko</span><span>22:00</span></div>
+    </div>
+  </section>
 </div>
 
+<!-- ✅ RSVP SECTION (Google Form) -->
+<div class="card" id="rsvp">
+  <section>
+    <h2 class="rsvpTitle">RSVP</h2>
+    <p class="rsvpSub">
+      Sizinlə bu gözəl günü paylaşacağımız üçün çox sevinirik 💛
+      Zəhmət olmasa, iştirakınızı təsdiqləmək üçün formanı doldurun.
+    </p>
+
+    <div class="formWrap">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform?embedded=true"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="rsvpActions">
+      <a class="rsvpBtn" target="_blank" rel="noopener"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform">
+        Formu ayrıca aç
+      </a>
+      <a class="rsvpBtn primary" target="_blank" rel="noopener"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform">
+        İndi doldur ✅
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- MAP (ən sonda) -->
 <div class="card" id="map">
-<section class="addressSection">
-<h2>ÜNVAN</h2>
-<h3>Şahənşah Premium Hall</h3>
-<div class="mapWrap">
-<iframe src="https://maps.google.com/maps?q=Şahənşah%20Premium%20Hall&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
-</div>
-<div class="mapButtons">
-<button class="copyBtn" id="copyAddress">Ünvanı kopyala</button>
-<a class="directionBtn" href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank">İstiqamət</a>
-</div>
-</section>
+  <section class="addressSection">
+    <h2>ÜNVAN</h2>
+    <h3>Şahənşah Premium Hall</h3>
+
+    <div class="mapWrap">
+      <iframe
+        src="https://maps.google.com/maps?q=Şahənşah%20Premium%20Hall&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"></iframe>
+    </div>
+
+    <div class="mapButtons">
+      <button class="copyBtn" id="copyAddress">Ünvanı kopyala</button>
+      <a class="directionBtn" href="https://maps.app.goo.gl/Q2AetF1tLfobqmAT8" target="_blank" rel="noopener">İstiqamət</a>
+    </div>
+  </section>
 </div>
 
 </div>
 
 <button class="musicBtn" id="musicBtn">🎵 Musiqini başlat</button>
 <audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+// COUNTDOWN
 const target=new Date("2026-03-30T18:00:00").getTime();
 setInterval(()=>{
-const now=Date.now();
-let diff=target-now;
-if(diff<0)return;
-document.getElementById("d").textContent=Math.floor(diff/(1000*60*60*24));
-document.getElementById("h").textContent=Math.floor(diff/(1000*60*60))%24;
-document.getElementById("m").textContent=Math.floor(diff/(1000*60))%60;
-document.getElementById("s").textContent=Math.floor(diff/1000)%60;
+  const now=Date.now();
+  let diff=target-now;
+  if(diff<0) return;
+
+  document.getElementById("d").textContent=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("h").textContent=Math.floor(diff/(1000*60*60))%24;
+  document.getElementById("m").textContent=Math.floor(diff/(1000*60))%60;
+  document.getElementById("s").textContent=Math.floor(diff/1000)%60;
 },1000);
 
+// COPY ADDRESS
 document.getElementById("copyAddress").onclick=()=>{
-navigator.clipboard.writeText("Şahənşah Premium Hall");
+  navigator.clipboard.writeText("Şahənşah Premium Hall");
 };
 
+// MUSIC
 const music=document.getElementById("bgMusic");
 const btn=document.getElementById("musicBtn");
 btn.onclick=()=>{
-if(music.paused){music.play();btn.textContent="⏸️ Musiqini dayandır";}
-else{music.pause();btn.textContent="🎵 Musiqini başlat";}
+  if(music.paused){ music.play(); btn.textContent="⏸️ Musiqini dayandır"; }
+  else{ music.pause(); btn.textContent="🎵 Musiqini başlat"; }
 };
+
+// Calendar button pulse
+const cal=document.getElementById("addToCalendar");
+if(cal){
+  cal.addEventListener("click", (e)=>{
+    cal.classList.remove("burst");
+    void cal.offsetWidth;
+    cal.classList.add("burst");
+  });
+}
 </script>
 
 </body>
