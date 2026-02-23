@@ -117,21 +117,21 @@ header b{
   grid-column:1/-1;
 }
 
+/* NAV */
 .nav{
-  display:flex;
-  gap:10px;
   padding:0 18px 18px;
 }
 
 .nav a{
-  flex:1;
+  display:block;
+  width:100%;
   text-align:center;
   text-decoration:none;
-  padding:10px;
+  padding:12px;
   border-radius:999px;
   border:1px solid rgba(210,180,120,.25);
   background:#fff;
-  font-size:13px;
+  font-size:14px;
 }
 
 .calBtn.burst{
@@ -242,6 +242,7 @@ section{
 
 <div class="card">
 <div class="cover"></div>
+
 <div class="title">
 <div>30 MART 2026</div>
 <h1>MƏMMƏD & SƏİDƏ</h1>
@@ -267,9 +268,6 @@ section{
 
 <div class="nav">
 <a href="wedding.ics" id="addToCalendar" class="calBtn">Təqvimə əlavə et 📅</a>
-<a href="#count">Geri sayım</a>
-<a href="#program">Proqram</a>
-<a href="#map">Ünvan</a>
 </div>
 </div>
 
@@ -292,7 +290,6 @@ section{
 <div class="programItem"><span><span class="dotGold"></span>Qonaqların qarşılanması</span><span>18:00</span></div>
 <div class="programItem"><span><span class="dotGold"></span>Toyun başlaması</span><span>19:00</span></div>
 <div class="programItem"><span><span class="dotGold"></span>İlk rəqs</span><span>19:15</span></div>
-<div class="programItem"><span><span class="dotGold"></span>Xalq musiqiləri</span><span>19:00–20:00</span></div>
 <div class="programItem"><span><span class="dotGold"></span>Tort</span><span>21:30</span></div>
 <div class="programItem"><span><span class="dotGold"></span>Disko</span><span>22:00</span></div>
 </div>
@@ -332,15 +329,15 @@ document.getElementById("m").textContent=Math.floor(diff/(1000*60))%60;
 document.getElementById("s").textContent=Math.floor(diff/1000)%60;
 },1000);
 
+document.getElementById("copyAddress").onclick=()=>{
+navigator.clipboard.writeText("Şahənşah Premium Hall");
+};
+
 const music=document.getElementById("bgMusic");
 const btn=document.getElementById("musicBtn");
 btn.onclick=()=>{
 if(music.paused){music.play();btn.textContent="⏸️ Musiqini dayandır";}
 else{music.pause();btn.textContent="🎵 Musiqini başlat";}
-};
-
-document.getElementById("copyAddress").onclick=()=>{
-navigator.clipboard.writeText("Şahənşah Premium Hall");
 };
 </script>
 
