@@ -117,23 +117,45 @@ header b{
   grid-column:1/-1;
 }
 
-/* NAV: yalnız 1 düymə */
+/* NAV: 2 düymə alt-alt */
 .nav{
   padding:0 18px 18px;
 }
-.nav a{
+
+.navStack{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.navStack a{
   display:block;
   width:100%;
   text-align:center;
   text-decoration:none;
-  padding:12px;
+  padding:14px;
   border-radius:999px;
-  border:1px solid rgba(210,180,120,.25);
-  background:#fff;
   font-size:14px;
-  white-space: nowrap;
+  font-weight:600;
 }
 
+/* Təqvim düyməsi */
+.calBtn{
+  border:1px solid rgba(210,180,120,.25);
+  background:#fff;
+  color:var(--text);
+  white-space:nowrap;
+}
+
+/* RSVP düyməsi */
+.rsvpNavBtn{
+  border:none;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2));
+  color:#000;
+  font-weight:800;
+}
+
+/* Təqvim animasiya */
 .calBtn.burst{
   animation:pulse .3s ease;
 }
@@ -181,47 +203,6 @@ section{
   margin-right:8px;
 }
 
-/* RSVP (Google Form iframe) */
-.rsvpTitle{
-  letter-spacing:4px;
-  font-size:14px;
-  color:var(--muted);
-  margin:0 0 10px;
-}
-.rsvpSub{
-  margin:0 0 14px;
-  color:var(--muted);
-  font-size:13.5px;
-  line-height:1.45;
-}
-.formWrap iframe{
-  width:100%;
-  height: 760px; /* telefonda rahat olsun */
-  border-radius:22px;
-  border:1px solid rgba(210,180,120,.25);
-  background:#fff;
-}
-.rsvpActions{
-  display:flex;
-  gap:12px;
-  margin-top:14px;
-}
-.rsvpBtn{
-  flex:1;
-  padding:12px;
-  border-radius:18px;
-  border:1px solid rgba(210,180,120,.3);
-  background:#fff;
-  text-decoration:none;
-  text-align:center;
-  color:#000;
-  font-weight:600;
-}
-.rsvpBtn.primary{
-  border:none;
-  background:linear-gradient(135deg,var(--gold1),var(--gold2));
-}
-
 /* ADDRESS / MAP */
 .addressSection h2{
   letter-spacing:4px;
@@ -257,6 +238,7 @@ section{
   font-weight:600;
 }
 
+/* MUSIC */
 .musicBtn{
   position:fixed;
   right:16px;
@@ -302,8 +284,14 @@ section{
     </div>
   </div>
 
-  <div class="nav">
+  <div class="nav navStack">
     <a href="wedding.ics" id="addToCalendar" class="calBtn">Təqvimə əlavə et 📅</a>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform"
+       target="_blank" rel="noopener"
+       class="rsvpNavBtn">
+      İştirakı təsdiqlə 💌
+    </a>
   </div>
 </div>
 
@@ -332,36 +320,6 @@ section{
   </section>
 </div>
 
-<!-- ✅ RSVP SECTION (Google Form) -->
-<div class="card" id="rsvp">
-  <section>
-    <h2 class="rsvpTitle">RSVP</h2>
-    <p class="rsvpSub">
-      Sizinlə bu gözəl günü paylaşacağımız üçün çox sevinirik 💛
-      Zəhmət olmasa, iştirakınızı təsdiqləmək üçün formanı doldurun.
-    </p>
-
-    <div class="formWrap">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform?embedded=true"
-        loading="lazy">
-      </iframe>
-    </div>
-
-    <div class="rsvpActions">
-      <a class="rsvpBtn" target="_blank" rel="noopener"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform">
-        Formu ayrıca aç
-      </a>
-      <a class="rsvpBtn primary" target="_blank" rel="noopener"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSfczn26G2JAbrCBSEE5tj9Ox43HorJGEEAXrnxcx20l3UF-FA/viewform">
-        İndi doldur ✅
-      </a>
-    </div>
-  </section>
-</div>
-
-<!-- MAP (ən sonda) -->
 <div class="card" id="map">
   <section class="addressSection">
     <h2>ÜNVAN</h2>
