@@ -129,14 +129,17 @@
       padding: 18px;
       position: relative;
     }
+
+    /* ✅ COVER: tam görünsün deyə contain + daha hündür */
     .cover{
-      height: 260px;
+      height: 420px;
       border-radius: 22px;
       overflow:hidden;
       border: 1px solid rgba(210,180,120,.25);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.12)),
-        url("cover.jpg") center/cover no-repeat;
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.06)),
+        url("cover.jpg") center/contain no-repeat;
+      background-color: rgba(255,255,255,.65);
     }
 
     .title{
@@ -483,7 +486,7 @@
 
   <!-- MUSIC (music.mp3) -->
   <button class="musicBtn" id="musicBtn">🎵 Musiqini başlat</button>
-  <audio id="bgMusic" loop preload="none">
+  <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
@@ -540,11 +543,39 @@
       }
     });
 
-    // ========= MUSIC (toggle) =========
+    // ========= MUSIC (auto + toggle) =========
     const music = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
     let playing = false;
 
+    async function tryAutoPlay(){
+      try{
+        // ✅ Autoplay üçün “muted start” fəndi (bəzən kömək edir)
+        music.muted = true;
+        await music.play();
+        music.muted = false;
+
+        playing = true;
+        musicBtn.textContent = "⏸️ Musiqini dayandır";
+      }catch(e){
+        // Autoplay bloklandı — problem deyil, düymə ilə başlayacaq
+        playing = false;
+        musicBtn.textContent = "🎵 Musiqini başlat";
+      }
+    }
+
+    // Səhifə yüklənən kimi cəhd
+    window.addEventListener("load", tryAutoPlay);
+
+    // Mobil üçün: ilk toxunuş/klik gələn kimi yenə cəhd
+    ["click","touchstart"].forEach(evt=>{
+      document.addEventListener(evt, function once(){
+        if(!playing){ tryAutoPlay(); }
+        document.removeEventListener(evt, once, {passive:true});
+      }, {passive:true});
+    });
+
+    // Toggle düyməsi
     musicBtn.addEventListener("click", async () => {
       try{
         if(!playing){
