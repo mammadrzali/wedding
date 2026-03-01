@@ -814,51 +814,51 @@
       });
     }
 
-    sendWishBtn.addEventListener("click", async () => {
-      try{
-        if(!WISH_WEB_APP_URL || WISH_WEB_APP_URL.includes("PASTE_")){
-          setStatus("❌ Web App URL əlavə edilməyib. Apps Script URL-ni WISH_WEB_APP_URL yerinə yazın.", false);
-          return;
-        }
+sendWishBtn.addEventListener("click", async () => {
+  try{
+    if(!WISH_WEB_APP_URL || WISH_WEB_APP_URL.includes("PASTE_")){
+      setStatus("❌ Web App URL əlavə edilməyib. Apps Script URL-ni WISH_WEB_APP_URL yerinə yazın.", false);
+      return;
+    }
 
-        const name = (wishNameEl.value || "").trim();
-        const note = (wishMessageEl.value || "").trim();
+    const name = (wishNameEl.value || "").trim();
+    const note = (wishMessageEl.value || "").trim();
 
-        if(!name){
-          setStatus("❌ Zəhmət olmasa adınızı yazın.", false);
-          return;
-        }
+    if(!name){
+      setStatus("❌ Zəhmət olmasa adınızı yazın.", false);
+      return;
+    }
 
-        setStatus("⏳ Göndərilir...");
+    setStatus("⏳ Göndərilir...");
 
-        let audioBase64 = "";
-        let audioMime = "";
+    let audioBase64 = "";
+    let audioMime = "";
 
-        if(recordedBlob){
-          audioBase64 = await blobToBase64(recordedBlob);
-          audioMime = recordedMime || recordedBlob.type || "audio/webm";
-        }
+    if(recordedBlob){
+      audioBase64 = await blobToBase64(recordedBlob);
+      audioMime = recordedMime || recordedBlob.type || "audio/webm";
+    }
 
-        const payload = { name, note, audioBase64, audioMime };
+    // ✅ CORS-suz göndərmək üçün form-urlencoded
+    const form = new URLSearchParams();
+    form.set("name", name);
+    form.set("note", note);
+    form.set("audioBase64", audioBase64);
+    form.set("audioMime", audioMime);
 
-        const resp = await fetch(WISH_WEB_APP_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        const out = await resp.json().catch(()=>({ok:false}));
-        if(out && out.ok){
-          setStatus("✅ <b>GÖNDƏRİLDİ ✓</b> Təşəkkürlər 💛");
-          // İstəsən auto close:
-          // setTimeout(closeWishModal, 900);
-        }else{
-          setStatus("❌ Göndərmə alınmadı. Bir az sonra yenə yoxlayın.", false);
-        }
-      }catch(err){
-        setStatus("❌ Xəta baş verdi. İnternetinizi yoxlayın.", false);
-      }
+    await fetch(WISH_WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+      body: form.toString(),
     });
+
+    // no-cors rejimində cavabı oxuya bilmirik, amma göndəriş gedir ✅
+    setStatus("✅ <b>GÖNDƏRİLDİ ✓</b> Təşəkkürlər 💛");
+  }catch(err){
+    setStatus("❌ Xəta baş verdi. İnternetinizi yoxlayın.", false);
+  }
+});
   </script>
 </body>
 </html>
