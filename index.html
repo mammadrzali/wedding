@@ -65,11 +65,16 @@
     }
 
     /* Cover */
-    .cover{
-  height:460px;
-  background:url("cover.jpg") center 45%/cover no-repeat;
-  width:100vw;
-  margin-left:calc(50% - 50vw);
+ .cover{
+  border-radius:26px 26px 0 0;
+  overflow:hidden;
+  background:#fffaf7;
+}
+
+.cover img{
+  width:100%;
+  height:auto;
+  display:block;
 }
 
     .title{
@@ -394,7 +399,9 @@
     </header>
 
     <div class="card">
-      <div class="cover"></div>
+      <div class="cover">
+  <img src="cover.jpg" alt="Məmməd & Səidə">
+</div>
 
       <div class="title">
         <div class="dateTop">30 MART 2026</div>
